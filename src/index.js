@@ -20,7 +20,7 @@ class App extends React.Component {
 				this.setState({ errorMessage: err.message });
 			}
 		);
-	}
+    }
 
 	// react says we have to define render!!
 	render() {
