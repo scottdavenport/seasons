@@ -5,23 +5,32 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 
-        // THIS IS THE ONLY TIME we directly set state without setState
+		// THIS IS THE ONLY TIME we directly set state without setState
 		this.state = {
 			lat: null,
-        };
-        
-        window.navigator.geolocation.getCurrentPosition(
+			errorMessage: '',
+		};
+
+		window.navigator.geolocation.getCurrentPosition(
 			(position) => {
-                // we called setSate!!!...only way to update state
-                this.setState({ lat: position.coords.latitude });
-            },
-			(err) => console.log(err)
+				// we called setSate!!!...only way to update state
+				this.setState({ lat: position.coords.latitude });
+			},
+			(err) => {
+				this.setState({ errorMessage: err.message });
+			}
 		);
 	}
 
 	// react says we have to define render!!
 	render() {
-		return <div>Latitude: {this.state.lat}</div>;
+		return (
+			<div>
+				Latitude: {this.state.lat}
+				<br />
+				Error: {this.state.errorMessage}
+			</div>
+		);
 	}
 }
 
